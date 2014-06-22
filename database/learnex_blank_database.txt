@@ -1,0 +1,417 @@
+-- phpMyAdmin SQL Dump
+-- version 3.3.10.4
+-- http://www.phpmyadmin.net
+--
+-- Host: mysql.codebibber.com
+-- Generation Time: Jun 06, 2014 at 12:14 AM
+-- Server version: 5.1.56
+-- PHP Version: 5.3.27
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `testlearnex`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `dob` varchar(50) NOT NULL,
+  `doj` varchar(20) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `c_address` text NOT NULL,
+  `p_address` text NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `marital_status` varchar(200) NOT NULL,
+  `parent_relation` varchar(20) NOT NULL,
+  `parent_name` varchar(100) NOT NULL,
+  `parent_phone` varchar(20) NOT NULL,
+  `parent_email` varchar(100) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `modify_date` varchar(50) NOT NULL,
+  `last_login_time` varchar(50) NOT NULL,
+  `news` text NOT NULL,
+  `change_pass_status` char(1) NOT NULL DEFAULT '1',
+  `change_pass_time` datetime NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `username`, `password`, `email`, `dob`, `doj`, `gender`, `phone`, `country`, `state`, `city`, `c_address`, `p_address`, `image`, `marital_status`, `parent_relation`, `parent_name`, `parent_phone`, `parent_email`, `create_date`, `modify_date`, `last_login_time`, `news`, `change_pass_status`, `change_pass_time`, `status`) VALUES
+(1, 'Admin', 'admin_101', '81dc9bdb52d04dc20036dbd8313ed055', 'admin@gmail.com', '19-05-1990', '29-05-2014', 'Male', '8010808080', 'India', 'Uttar Pradesh', 'Delhi', 'Malviya Nagar, New Delhi, India', '', 'default.png', '', 'Father', 'Deepak Gupta', '8010979797', 'deepak@gmail.com', '2014-02-20 18:41:34', '', '', '', '0', '2014-06-06 12:41:46', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE IF NOT EXISTS `attendance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timetable_id` varchar(20) NOT NULL,
+  `student` text NOT NULL,
+  `date` varchar(20) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `attendance`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `batch`
+--
+
+CREATE TABLE IF NOT EXISTS `batch` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `course` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `students` varchar(20) NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `batch`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course`
+--
+
+CREATE TABLE IF NOT EXISTS `course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `academic_year` varchar(255) NOT NULL,
+  `fee` varchar(255) NOT NULL,
+  `discount` varchar(255) NOT NULL,
+  `discount_mode` varchar(255) NOT NULL,
+  `discount_amount` varchar(255) NOT NULL,
+  `net_fee_amount` varchar(255) NOT NULL,
+  `instalment_applicable` varchar(255) NOT NULL,
+  `no_of_instalment` varchar(255) NOT NULL,
+  `instalment_mode` varchar(255) NOT NULL,
+  `instalment_amount` varchar(255) NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `course`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecture_schedule`
+--
+
+CREATE TABLE IF NOT EXISTS `lecture_schedule` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `lecture_schedule`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `create_user` varchar(50) NOT NULL,
+  `news_title` varchar(255) NOT NULL,
+  `news_type` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `attachment` varchar(255) NOT NULL,
+  `publish_time` varchar(255) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `share_with` text NOT NULL,
+  `custome_share` varchar(255) NOT NULL,
+  `active` char(1) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `news`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news_type`
+--
+
+CREATE TABLE IF NOT EXISTS `news_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `news_type`
+--
+
+INSERT INTO `news_type` (`id`, `name`, `status`) VALUES
+(1, 'misc', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `organization`
+--
+
+CREATE TABLE IF NOT EXISTS `organization` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `logo` varchar(100) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `organization`
+--
+
+INSERT INTO `organization` (`id`, `name`, `logo`, `country`, `state`, `city`, `phone`, `email`, `website`, `address`, `status`) VALUES
+(1, 'LearnEx Education', 'logo.jpg', 'India', 'Rajasthan', 'Jaipur', '9865895689,9898986598', 'contact@learnexeducation.com,info@learnexeducation.com', 'http://www.learnexeducation.com', 'A-281, Shivalik, Malviya Nagar, New delhi (585869)', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `organization_location`
+--
+
+CREATE TABLE IF NOT EXISTS `organization_location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_name` varchar(255) NOT NULL,
+  `location_head` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `state` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `organization_location`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE IF NOT EXISTS `staff` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `dob` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `doj` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `c_address` varchar(255) NOT NULL,
+  `p_address` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `staff_type` varchar(255) NOT NULL,
+  `emp_type` varchar(255) NOT NULL,
+  `marital_status` varchar(255) NOT NULL,
+  `parent_name` varchar(255) NOT NULL,
+  `parent_relation` varchar(255) NOT NULL,
+  `parent_phone` varchar(255) NOT NULL,
+  `parent_email` varchar(255) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `news` text NOT NULL,
+  `change_pass_status` char(1) NOT NULL DEFAULT '1',
+  `change_pass_time` datetime NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `staff`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE IF NOT EXISTS `student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `dob` varchar(255) NOT NULL,
+  `doj` varchar(20) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `blood_group` varchar(20) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `class` varchar(20) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `state` varchar(100) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `parent_relation` varchar(200) NOT NULL,
+  `parent_name` varchar(200) NOT NULL,
+  `parent_occupation` varchar(200) NOT NULL,
+  `parent_phone` varchar(200) NOT NULL,
+  `parent_email` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `current_address` varchar(255) NOT NULL,
+  `permanent_address` varchar(255) NOT NULL,
+  `course` varchar(100) NOT NULL,
+  `batch` varchar(100) NOT NULL,
+  `total_amount` varchar(20) NOT NULL,
+  `discount` varchar(20) NOT NULL,
+  `discount_mode` varchar(20) NOT NULL,
+  `discount_amount` varchar(20) NOT NULL,
+  `net_amount` varchar(20) NOT NULL,
+  `pay_amount` varchar(20) NOT NULL,
+  `payment_mode` varchar(20) NOT NULL,
+  `cheque_number` varchar(50) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `last_login_time` datetime NOT NULL,
+  `news` text NOT NULL,
+  `change_pass_status` char(1) NOT NULL DEFAULT '1',
+  `change_pass_time` datetime NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `student`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
+CREATE TABLE IF NOT EXISTS `subject` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `topic` text NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `subject`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tax`
+--
+
+CREATE TABLE IF NOT EXISTS `tax` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tax_name` varchar(255) NOT NULL,
+  `tax_value` varchar(10) NOT NULL,
+  `applicable` char(1) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `modify_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tax`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetable`
+--
+
+CREATE TABLE IF NOT EXISTS `timetable` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) NOT NULL,
+  `batch` int(11) NOT NULL,
+  `day` varchar(20) NOT NULL,
+  `start_time` varchar(20) NOT NULL,
+  `end_time` varchar(20) NOT NULL,
+  `teacher` varchar(50) NOT NULL,
+  `subject` varchar(50) NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `timetable`
+--
+

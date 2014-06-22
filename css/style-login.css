@@ -1,0 +1,154 @@
+@font-face {
+	font-family: "Lato"; /*a name to be used later*/
+    src: url('font/Lato-Regular.ttf'); /*URL to font*/
+}
+
+.login{
+	overflow-x: hidden;
+}
+.login .login-logo{
+	background: #0A4961;
+}
+.login .login-logo .logo
+{
+	text-align: center;
+	font-size: 50px;
+	font-family: "Lato";
+	color: #fff;
+	padding-top:35px;
+}
+.logo-login{
+	text-align: center;
+	font-family: "Lato";
+	color: #fff;
+	font-size: 57px;
+	padding-top:45px;
+	padding-bottom: 45px;
+}
+.change-pass{
+	text-align: center;
+	font-size: 30px;
+	font-family: "Lato";
+	color:#fff;
+	padding: 20px;
+}
+.login .login-form{
+	padding-top: 40px;
+}
+.login .login-form .row{
+	margin-top: 15px;
+}
+.login .login-form .row input[type="text"],input[type="password"]{
+
+	font-family: "Lato";
+	color:#0A4961;
+	border-radius: 0;
+	padding-left: 80px;
+	font-size: 1.8em;
+	height: 68px;
+/*	margin-bottom: 10px;
+	margin-top: 10px;
+*/
+}
+.login .login-form .row input[type="text"]:focus,input[type="password"]:focus{
+	border-bottom: 3px solid #0A4961;
+}
+.login .login-form .row .error{
+	color:rgb(189, 0, 0);
+	font-family: "Lato";
+	text-align:center;
+	font-size: 17px;
+}
+.login .login-form .row input[type="submit"]{
+	height: 60px;
+	background: #0A4961;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-family: "Lato";
+	font-size: 1.2em;
+	border:none;
+}
+.submit-btn{
+	padding: 13px;
+	background: #0A4961;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-family: "Lato";
+	border:none;
+	cursor: pointer;
+	font-size: 23px;
+	height: 60px;
+}
+.save-btn{
+	background: #168039;
+	color: #fff;
+}
+.login .login-form .row input[type="submit"]:hover{
+	-webkit-box-shadow: 0px 3px 7px 0px rgba(92,92,92,1);
+-moz-box-shadow: 0px 3px 7px 0px rgba(92,92,92,1);
+box-shadow: 0px 3px 7px 0px rgba(92,92,92,1);
+}
+.login .login-form .row .forget-password{
+	text-align: right;
+}
+.login .login-form .row .forget-password a{
+	color:#0A4961;
+	text-decoration: none;
+}
+/*fixed footer*/
+#footer{
+    position:fixed;
+    height:50px;
+    background-color:#0A4961;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+    padding-top: 17px;
+	color:#fff;
+	text-align: center;
+}
+#footer a{
+	color:#fff;
+	text-decoration: none;
+
+}
+.icon-1 {
+padding: 0px;
+background: url(../img/user.png) left no-repeat !important;
+}
+.icon-2 {
+padding: 0px;
+background: url(../img/password.png) left no-repeat !important;
+}
+.icon-3 {
+padding: 0px;
+background: url(../img/pass-1.png) left no-repeat !important;
+}
+.icon-4 {
+padding: 0px;
+background: url(../img/pass-2.png) left no-repeat !important;
+}
+.error-msg{
+	text-align:left;
+	padding-top: 19px;
+	font-size: 17px;
+	font-family: "lato";
+}
+.error-msg.short{
+	color:#FF0000;
+}
+
+.error-msg.weak{
+	color:#E66C2C;
+}
+
+.error-msg.good{
+	color:#2D98F3;
+}
+
+.error-msg.strong{
+	color:#006400;
+}

@@ -1,0 +1,13 @@
+ ☐ fetchbyid($id,$table);
+
+ ☐ fetchbyfield($field,$value,$table);
+
+ ☐ fetchalldata($table);
+
+ ☐ fetchalldatadesc($table);
+
+ ☐ updatedata($data,$id,$table);
+
+ ☐ insertdata($data,$table);
+
+ ☐ fetchlastdata($table);
