@@ -83,9 +83,12 @@ else{
 
 								$subject_id = $subject['id'];
 								$subject_name = $subject['name'];
-								$subject_topic = explode(',', $subject['topic']);
-								sort($subject_topic);
-								$number_of_topic = count($subject_topic);
+								$topic_detail = $this->user_model->fetchtopic($subject_id);
+								// foreach ($topic_detail as $topic) {
+								// 	$topic_d = 
+								// }
+								// sort($subject_topic);
+								$number_of_topic = count($topic_detail);
 								if($number_of_topic > 1)
 								{
 									$number_of_topic = $number_of_topic." Topics";
@@ -95,139 +98,7 @@ else{
 									$number_of_topic = $number_of_topic." Topic";
 								}
 
-								//if select any Subject..
-								if(isset($selected_subject) && $selected_subject != "")
-								{
-									//execute when selected_subject id is same as subject id.
-									if($subject_id == $selected_subject['id'])
-									{
-
-										echo '<div class="row">
-											<div class="col-lg-12 top-label">
-												<div class="row">
-													<div class="col-lg-6 location-name">'.$subject_name.'</div>
-													<div class="col-lg-6 topic_number">'.$number_of_topic.'</div>
-												</div>
-											</div>
-										</div>';
-
-										echo '<div class="row">
-												<div class="col-lg-12">
-													<div class="bottom-label '.$i.' selected" id="'.$subject_id.'">
-														<a href="'.base_url().'study/subject/'.$subject_id.'">
-														<div class="row">';
-															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
-															{
-																if($a < 2)
-																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
-																}
-															}
-															echo '</div>';
-
-															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
-															{
-																if($a > 1 && $a < 4)
-																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
-																}
-															}
-															echo '</div>';
-
-															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
-															{
-																if($a > 3 && $a < 6)
-																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
-																}
-																
-															}
-															echo '</div>';
-														
-															?>
-
-														</div><!-- end row -->
-														</a>
-													</div><!-- end bottom-label -->
-												</div><!-- end col-lg-12 -->
-											</div>
-									<?php
-									}// end if($subject_id == $selected_subject['id'])
-									else
-									{
-										echo '<div class="row">
-											<div class="col-lg-12 top-label">
-												<div class="row">
-													<div class="col-lg-6 location-name">'.$subject_name.'</div>
-													<div class="col-lg-6 topic_number">'.$number_of_topic.'</div>
-												</div>
-											</div>
-										</div>';
-
-										echo '<div class="row">
-												<div class="col-lg-12">
-													<div class="bottom-label '.$i.'" id="'.$subject_id.'">
-														<a href="'.base_url().'study/subject/'.$subject_id.'">
-														<div class="row">';
-															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
-															{
-																if($a < 2)
-																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
-																}
-															}
-															echo '</div>';
-
-															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
-															{
-																if($a > 1 && $a < 4)
-																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
-																}
-															}
-															echo '</div>';
-
-															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
-															{
-																if($a > 3 && $a < 6)
-																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
-																}
-																
-															}
-															echo '</div>';
-														
-															?>
-
-														</div><!-- end row -->
-														</a>
-													</div><!-- end bottom-label -->
-												</div><!-- end col-lg-12 -->
-											</div>
-									<?php
-									}//end else condition..
-								}//end if(isset($selected_subject) && $selected_subject != "")
-								//execute if there is no any subject selected..
-								else
-								{
+								
 									echo '<div class="row">
 											<div class="col-lg-12 top-label">
 												<div class="row">
@@ -243,39 +114,38 @@ else{
 														<a href="'.base_url().'study/subject/'.$subject_id.'">
 														<div class="row">';
 															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
+															for($a = 0; $a < count($topic_detail); $a++)
 															{
 																if($a < 2)
 																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
+																	$topic_name = character_limiter($topic_detail[$a]['name'],12);
+																	echo $topic_name;
+																	echo "<br>";
 																}
 															}
 															echo '</div>';
 
 															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
+															for($a = 0; $a < count($topic_detail); $a++)
 															{
 																if($a > 1 && $a < 4)
 																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
+																	$topic_name = character_limiter($topic_detail[$a]['name'],12);
+																	echo $topic_name;
+																	echo "<br>";
 																}
 															}
 															echo '</div>';
 
 															echo '<div class="col-lg-4 subject-topic">';
-															for($a = 0; $a < count($subject_topic); $a++)
+															for($a = 0; $a < count($topic_detail); $a++)
 															{
 																if($a > 3 && $a < 6)
 																{
-																$topic_name = character_limiter($subject_topic[$a],12);
-																echo $topic_name;
-																echo "<br>";
+																	$topic_name = character_limiter($topic_detail[$a]['name'],12);
+																	echo $topic_name;
+																	echo "<br>";
 																}
-																
 															}
 															echo '</div>';
 														
@@ -287,7 +157,6 @@ else{
 												</div><!-- end col-lg-12 -->
 											</div>
 								<?php
-								}//end else condition..
 								$i++;
 							} // end foreach loop foreach($subject_details as $subject)
 						}//end if condition.. if($no_of_subject > 0)
@@ -357,6 +226,13 @@ else{
 						//then display editable mode form..
 						if( isset($selected_subject) && !empty($selected_subject) )
 						{
+							$selected_id = $selected_subject['id'];
+							$topic_detail = $this->user_model->fetchtopic($selected_id);
+							for($a = 0; $a < count($topic_detail); $a++)
+							{
+								$topic_v[] =  $topic_detail[$a]['name'];
+							}
+							$topic_value =  implode(",", $topic_v);
 						?>
 						<!-- academic year and course name section -->
 						<div class="row">
@@ -372,7 +248,7 @@ else{
 							<div class="col-lg-10 col-centered">
 								<div class="label-text">Subject Topics :</div>
 								<div>
-									<input type="text" value="<?php echo $selected_subject['topic']?>" id="subject_topics" data-role="tagsinput" placeholder="Add Title.."/>
+									<input type="text" value="<?php echo $topic_value; ?>" id="subject_topics" data-role="tagsinput" placeholder="Add Title.."/>
 									<div class="topic_div" style="display:none;"></div>
 								</div>
 							</div>
@@ -581,6 +457,23 @@ jQuery(document).ready(function($) {
 		var top_value = parseFloat(offset.top) - 200;
 		$('.view-grid').animate({scrollTop:top_value}, 'slow');
   	
+  	<?php
+  	}
+  	?>
+
+  	<?php 
+  	if(isset($selected_subject) && $selected_subject != "")
+  	{
+  	?>
+  		var id = "<?php echo $selected_subject['id']; ?>";
+  		$("#"+id).css({
+			backgroundColor: '#C7DCE4'
+		});
+  		var p = $( "#"+id );
+
+		var offset = p.offset();
+		var top_value = parseFloat(offset.top) - 200;
+		$('.view-grid').animate({scrollTop:top_value}, 'slow');
   	<?php
   	}
   	?>

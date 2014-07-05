@@ -163,9 +163,6 @@ class User extends CI_Controller
 				// script for insert staff data into database..
 				$query = $this->user_model->insert_staff_details($insert_data);
 
-				//create timetable (lecture Scheduling) Table for Staff...
-				$table_name = "tt_$username";
-	            $this->user_model->create_staff_tt($table_name);
 
 		        for($i = 1; $i <= 7; $i++)
 		        {

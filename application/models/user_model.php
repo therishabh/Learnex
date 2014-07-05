@@ -154,7 +154,7 @@ class User_model extends CI_Model
 		$query = $this->db->insert($table,$data);
 		if($query)
 		{
-			return true;
+			return $this->db->insert_id();
 		}
 		else
 		{
@@ -950,6 +950,193 @@ class User_model extends CI_Model
 		}
 	}
 
+
+	function fetchtopic($subject_id)
+	{
+		$this->db->where("subject",$subject_id);
+		$this->db->select('name');
+		$this->db->select('id');
+		$query = $this->db->get("topic");
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function deletetopic($subject_id)
+	{
+		$this->db->where('subject',$subject_id);
+		$this->db->delete("topic");
+		return true;
+	}
+
+	function lastextraclass()
+	{
+		$this->db->select('code');
+		$this->db->order_by('id','desc');
+		$this->db->limit('1');
+
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+
+	function fetch_running_extra_class()
+	{
+		$this->db->where('allow',"1");
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function fetch_pending_extra_class()
+	{
+		$this->db->where('allow',"0");
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function fetch_own_extra_class($student_id)
+	{
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$this->db->where('created_by',$student_id);
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function fetch_enroll_extra_class($student_id)
+	{
+		$this->db->where('student_id',$student_id);
+		$query = $this->db->get('extra_class_student');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function fetch_batchment($course_code,$batch)
+	{
+		$this->db->where('class_code',$course_code);
+		$this->db->where('batch',$batch);
+		$query = $this->db->get('extra_class_student');
+		return $query->num_rows();	
+	}
+
+	function running_extra_class_search($subject,$topic,$code)
+	{
+		$this->db->like('subject',$subject);
+		$this->db->like('topic',$topic,"after");
+		$this->db->like('code',$code);
+		$this->db->where('allow',"1");
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function pending_extra_class_search($subject,$topic,$code)
+	{
+		$this->db->like('subject',$subject);
+		$this->db->like('topic',$topic,"after");
+		$this->db->like('code',$code);
+		$this->db->where('allow',"0");
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function own_extra_class_search($subject,$topic,$code,$student_id)
+	{
+		$this->db->like('subject',$subject);
+		$this->db->like('topic',$topic,"after");
+		$this->db->like('code',$code);
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$this->db->where('created_by',$student_id);
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	function enroll_extra_class_search($subject,$topic,$code,$student_id)
+	{
+		// $query = $this->db->query("SELECT extra_class_student.class_code AS class_code FROM extra_class_student LEFT JOIN extra_class ON extra_class.code LIKE  CONCAT('%',$code,'%') AND extra_class.subject LIKE  CONCAT('%',$subject,'%')  AND extra_class.topic LIKE  CONCAT('%',$topic,'%') AND extra_class_student.student_id LIKE  CONCAT('%',$student_id,'%') WHERE extra_class_student.class_code = extra_class.code");
+		$query = $this->db->query("SELECT extra_class_student.class_code AS class_code FROM extra_class_student LEFT JOIN extra_class ON extra_class.code LIKE '%$code%' AND extra_class.subject LIKE '%$subject%'  AND extra_class.topic LIKE '$topic%' AND extra_class_student.student_id LIKE  '%$student_id%'  WHERE extra_class_student.class_code = extra_class.code");
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 
 

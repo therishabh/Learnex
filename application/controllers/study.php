@@ -572,10 +572,19 @@ class Study extends CI_Controller
         }
         else if( $this->input->post("insert_btn") )
         {
-          $insert_data['name'] = $this->input->post('subject_name');
-          $insert_data['topic'] = trim($this->input->post('topic'), ",");
+            $insert_subject['name'] = $this->input->post('subject_name');
+            $topic = trim($this->input->post('topic'), ",");
 
-          $query = $this->manage_course->insert_subject($insert_data);
+            $topic_array = explode(",",$topic);
+
+            $query_subject = $this->user_model->insertdata($insert_subject,"subject");
+
+            $insert_topic['subject'] = $query_subject;
+            foreach ($topic_array as $topic_name) {
+                $insert_topic['name'] = $topic_name;
+                $query = $this->user_model->insertdata($insert_topic,"topic");
+            }
+
           
           if($query)
           {
@@ -590,19 +599,30 @@ class Study extends CI_Controller
         }
         elseif( $this->input->post("update_btn") )
         {
-          $selected_id = $this->input->post('subject_id');
-          $insert_data['name'] = $this->input->post('subject_name');
-          $insert_data['topic'] = trim($this->input->post('topic'), ",");
+            $subject_id = $this->input->post('subject_id');
+            $insert_subject['name'] = $this->input->post('subject_name');
+            
+            $topic = trim($this->input->post('topic'), ",");
 
-          $query = $this->manage_course->update_subject($insert_data,$selected_id);
-          
+            $topic_array = explode(",",$topic);
+
+            $query_subject = $this->user_model->updatedata($insert_subject,$subject_id,"subject");
+
+            $query_delete_topic = $this->user_model->deletetopic($subject_id);
+
+            $insert_topic['subject'] = $subject_id;
+            foreach ($topic_array as $topic_name) {
+                $insert_topic['name'] = $topic_name;
+                $query = $this->user_model->insertdata($insert_topic,"topic");
+            }
+
           if($query)
           {
             //redirect to subject page.. 
             //because of post-request-get rule..
             //there is for Duplicate form submissions avoid..
             //start session for display message..
-            $this->session->set_userdata('update_subject',$selected_id);
+            $this->session->set_userdata('update_subject',$subject_id);
             header("Location: " . $_SERVER['REQUEST_URI']);
           }
         }

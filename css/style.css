@@ -307,7 +307,7 @@ div.main-body .left-side{
 	border-right: 1px solid rgb(207, 207, 207);
 }
 div.main-body .left-side .search-bar{
-	height: 50px;
+	height: 44px;
 	border-bottom: 1px solid rgb(207,207,207);
 }
 div.main-body .left-side .search-bar input[type='text']
@@ -320,7 +320,7 @@ div.main-body .left-side .search-bar input[type='text']
 	color: #0A4961;
 	padding-left: 20px;
 	background: url(../img/search.png) no-repeat 98% 50%;
-	background-size: 27px;
+	background-size: 18px;
 	padding-right: 55px;
 }
 div.main-body .left-side .search-bar input[type='text']:focus{
@@ -332,8 +332,8 @@ div.main-body .left-side .search-bar select{
 	border: 0;
 	width: 100%;
 	font-family: "Lato";
-	font-size: 17px;
-	padding: 12px;
+	font-size: 16px;
+	padding: 10px;
 	outline: 0;
 	color:#929292;
 }
@@ -1622,3 +1622,277 @@ div.main-body .student-info-detail .student-image img{
 	margin-left: 20px;
 	border: 1px solid #000;
 }
+
+/*assignment section*/
+div.main-body .assignment .left-side .view-grid {
+max-height: calc(100% - 130px);
+}
+
+
+div.main-body .assignment .left-side .section .view-grid .post-date {
+text-align: right;
+}
+
+div.main-body .assignment .left-side .section .view-grid .bottom-label {
+	padding: 4px 20px;
+}
+div.main-body .assignment .left-side .section .view-grid .bottom-label .assignment-left{
+	border-right: 1px solid #ccc;
+	height: 68px;
+	overflow: hidden;
+} 
+div.main-body .assignment .right-side .display-div .assignment-right-div{
+max-height: calc(100% - 179px);
+height: 100%;
+overflow-y: auto;
+overflow-x: hidden;
+padding: 20px;
+}
+
+div.main-body .assignment .right-side .display-div .assignment-right-div .add-btn img, .remove-btn img{
+	height: 37px;
+	margin-top: 51px;
+	cursor: pointer;
+}
+
+div.main-body .assignment .right-side .display-div .assignment-right-div .course-batch.background:nth-child(even){
+	background: #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+div.main-body .assignment .right-side .display-div .assignment-right-div .course-batch.background:nth-child(odd){
+	background: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+div.main-body .assignment .right-side .display-div .assignment-right-div .select-file{
+	font-size: 12px;
+	color: green;
+	text-align: center;
+}
+
+
+
+/*extra class*/
+.extra-class .left-side .left-nav div{
+	text-align: center;
+	padding: 5px;
+	border-right: 1px solid #ddd;
+	cursor: pointer;
+	font-family: "Lato";
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	-ms-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
+}
+.extra-class .left-side .left-nav div:last-child{
+	border-right: none !important;
+}
+.extra-class .left-side .left-nav div.selected{
+	background: #0A4961;
+	color: #fff;
+}
+.extra-class .left-side .left-nav{
+	border-bottom: 1px solid #ddd;
+}
+.extra-class .left-side .view-grid .no-of-student{
+	text-align: right;
+}
+.extra-class .left-side .section .view-grid .bottom-label {
+	padding: 9px 20px !important;
+}
+div.main-body .extra-class .right-side .display-div .class-right-div {
+	max-height: calc(100% - 177px);
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 20px;
+}
+div.main-body .extra-class .right-side .class-right-div .label-text {
+	font-size: 15px;
+	font-family: "Lato";
+	padding-right: 30px;
+	text-align: left;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class{
+	width: 100%;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class thead {
+	background: #0A4961;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class thead tr td{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr:nth-child(even) {
+	background: #fff;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr:nth-child(odd) {
+	background: #eee;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr td{
+	font-size: 14px;
+	padding: 5px;
+	text-align: center;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr td:nth-child(2) span.running{
+	height: 10px;
+	width: 10px;
+	background: green;
+	display: block;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr td:nth-child(2) span.pending{
+	height: 10px;
+	width: 10px;
+	background: red;
+	display: block;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr td:nth-child(5) span.enroll{
+	background: #0A4961;
+	color: #fff;
+	padding: 2px 23px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+div.main-body .extra-class .right-side .class-right-div .exist-class tbody tr td:nth-child(5) span.enrolled{
+	background: #0B9216;
+	color: #fff;
+	padding: 2px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+div.main-body .extra-class .right-side .class-right-div .pending-running{
+	margin-top: 10px;
+}
+div.main-body .extra-class .right-side .class-right-div .pending-running span:nth-child(1){
+	height: 10px;
+	width: 10px;
+	background: red;
+	display: inline-block;
+	margin-right: 10px;
+}
+div.main-body .extra-class .right-side .class-right-div .pending-running span:nth-child(2){
+	height: 10px;
+	width: 10px;
+	background: green;
+	display: inline-block;
+	margin-left: 50px;
+	margin-right: 10px;
+}
+div.main-body .extra-class .right-side .class-right-div .view-full-detail{
+	text-decoration: underline;
+	cursor: pointer;
+}
+div.main-body .extra-class .right-side .success-msg span.enroll{
+	background: #0A4961;
+	color: #fff;
+	padding: 6px 34px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 28px;
+}
+
+div.main-body .extra-class .right-side .success-msg span.enrolled{
+	background: #0B9216;
+	color: #fff;
+	padding: 6px 26px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 28px;
+
+}
+
+
+.already-exist-modal .modal-content{
+	border-radius: 0;
+}
+.already-exist-modal .modal-content table{
+	width: 100%;
+	margin-top: 20px;
+}
+.already-exist-modal .modal-content table thead {
+	background: #0A4961;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+}
+.already-exist-modal .modal-content table thead tr td{
+	padding: 5px;
+	text-align: center;
+}
+.already-exist-modal .modal-content table tbody tr:nth-child(even) {
+	background: #fff;
+}
+.already-exist-modal .modal-content table tbody tr:nth-child(odd) {
+	background: #eee;
+}
+.already-exist-modal .modal-content table tbody tr td{
+	font-size: 14px;
+	padding: 5px;
+	text-align: center;
+}
+.already-exist-modal .modal-content table tbody tr td:nth-child(2) span.running{
+	height: 10px;
+	width: 10px;
+	background: green;
+	display: block;
+}
+.already-exist-modal .modal-content table tbody tr td:nth-child(2) span.pending{
+	height: 10px;
+	width: 10px;
+	background: red;
+	display: block;
+}
+
+.already-exist-modal .modal-content table tbody tr td:nth-child(10) span.enroll{
+	background: #0A4961;
+	color: #fff;
+	padding: 2px 23px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.already-exist-modal .modal-content table tbody tr td:nth-child(10) span.enrolled{
+	background: #0B9216;
+	color: #fff;
+	padding: 2px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.already-exist-modal .modal-content .pending-running{
+	margin-top: 10px;
+}
+.already-exist-modal .modal-content .pending-running span:nth-child(1){
+	height: 10px;
+	width: 10px;
+	background: red;
+	display: inline-block;
+	margin-right: 10px;
+}
+.already-exist-modal .modal-content .pending-running span:nth-child(2){
+	height: 10px;
+	width: 10px;
+	background: green;
+	display: inline-block;
+	margin-left: 50px;
+	margin-right: 10px;
+}
+.already-exist-modal .modal-content .subject , .topic{
+	text-align: center;
+}
+.already-exist-modal .modal-content .subject span:nth-child(1) , .topic span:nth-child(1){
+	font-size: 18px;
+	font-weight: bold;
+	color: #0A4961;
+}
+.already-exist-modal .modal-content .subject span:nth-child(2) , .topic span:nth-child(2){
+	font-size: 18px;
+	color: #0A4961;
+}
+

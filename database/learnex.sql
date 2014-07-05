@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2014 at 09:14 AM
--- Server version: 5.6.14
--- PHP Version: 5.5.6
+-- Generation Time: Jul 05, 2014 at 11:16 PM
+-- Server version: 5.5.36
+-- PHP Version: 5.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -20,11 +20,24 @@ SET time_zone = "+00:00";
 -- Database: `learnex`
 --
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test_multi_sets`()
+    DETERMINISTIC
+begin
+        select user() as first_col;
+        select user() as first_col, now() as second_col;
+        select user() as first_col, now() as second_col, now() as third_col;
+        end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `academic_year`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
@@ -64,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `username`, `password`, `email`, `dob`, `doj`, `gender`, `phone`, `country`, `state`, `city`, `c_address`, `p_address`, `image`, `marital_status`, `parent_relation`, `parent_name`, `parent_phone`, `parent_email`, `batch_id`, `create_date`, `modify_date`, `last_login_time`, `news`, `change_pass_status`, `change_pass_time`, `status`) VALUES
-(1, 'Sohan Gupta', 'admin_101', 'e10adc3949ba59abbe56e057f20f883e', 'sohan_gupta@gmail.com', '19-05-1990', '31-12-1969', 'Male', '8010979311', 'India', 'Uttar Pradesh', 'Ghaziabad', 'Malviya Nagar, New Delhi, India', 'Malviya Nagar, New Delhi, India', '2z7ztw9.jpg', '', 'Father', 'Deepak Gupta', '9865321245', 'Gungun Gupta', '', '2014-02-20 18:41:34', '14-06-04 00:28:27', '', '*16**17**15**13**7**8**12**11**10**14**2**3*', '0', '2014-06-06 12:30:24', '1'),
+(1, 'Sohan Gupta', 'admin_101', '202cb962ac59075b964b07152d234b70', 'sohan_gupta@gmail.com', '19-05-1990', '31-12-1969', 'Male', '8010979311', 'India', 'Uttar Pradesh', 'Ghaziabad', 'Malviya Nagar, New Delhi, India', 'Malviya Nagar, New Delhi, India', '2z7ztw9.jpg', '', 'Father', 'Deepak Gupta', '9865321245', 'Gungun Gupta', '', '2014-02-20 18:41:34', '14-06-04 00:28:27', '', '*16**17**15**13**7**8**12**11**10**14**2**3*', '0', '2014-06-06 12:30:24', '1'),
 (2, 'Shilpi Mishra', 'admin_102', '202cb962ac59075b964b07152d234b70', 'shilpi09@gmail.com', '16-11-1990', '01-01-1970', 'Female', '9865327845', 'India', 'Uttar Pradesh', 'Lucknow', 'Lucknow, India', 'Lucknow, India', 'icphl43.jpg', '', 'Father', 'Anuj Mishra', '8956784589', 'Usha Mishra', '', '2014-02-21 11:05:18', '14-06-04 00:28:42', '', '*13**12**11**10*', '1', '0000-00-00 00:00:00', '1'),
 (3, 'Rishabh', 'admin_103', '202cb962ac59075b964b07152d234b70', 'rishabh_agr@yahoo.com', '19-04-1990', '01-01-1970', 'Male', '8010979311', 'India', 'Uttar Pradesh', 'Kanpur', 'Sitapur, Lucknow, India', 'Sitapur, Lucknow, India', 'muu4wb2.jpg', '', 'Father', '', '', '', '', '2014-02-24 09:03:24', '14-06-04 00:29:02', '', '*8*', '1', '0000-00-00 00:00:00', '1'),
 (4, 'Sachin Agrawal', 'admin_104', '202cb962ac59075b964b07152d234b70', 'sachin@gmail.com', '10-05-1989', '06-01-2014', 'Male', '8010979966', 'Guernsey', 'St. Saviour', 'Kerala', 'Kerala, India', 'Kerala, India', 'l9m2rh5.jpg', '', 'Mother', 'Gita Devi', '8844775533', 'gita@gmail.com', '', '2014-05-10 00:48:22', '14-06-04 00:29:15', '', '', '1', '0000-00-00 00:00:00', '1'),
@@ -86,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   `modify_date` datetime NOT NULL,
   `status` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `attendance`
@@ -106,7 +119,8 @@ INSERT INTO `attendance` (`id`, `timetable_id`, `student`, `date`, `create_date`
 (11, '571', '5,3,15,1', '22/05/2014', '2014-05-22 16:25:08', '0000-00-00 00:00:00', '1'),
 (12, '373', '17,18', '22/05/2014', '2014-05-22 16:33:18', '0000-00-00 00:00:00', '1'),
 (13, '373', '17,18', '21/05/2014', '2014-05-22 16:33:29', '0000-00-00 00:00:00', '1'),
-(14, '373', '18', '17/05/2014', '2014-05-22 16:33:50', '0000-00-00 00:00:00', '1');
+(14, '373', '18', '17/05/2014', '2014-05-22 16:33:50', '0000-00-00 00:00:00', '1'),
+(15, '518', '19,18', '24/06/2014', '2014-06-24 14:02:29', '0000-00-00 00:00:00', '1');
 
 -- --------------------------------------------------------
 
@@ -185,6 +199,87 @@ INSERT INTO `course` (`id`, `name`, `academic_year`, `fee`, `discount`, `discoun
 (17, 'IIT Foundation', '2014-2015', '35000', 'yes', 'percent', '10', '31500.00', 'no', '', '', '', '1'),
 (18, 'IIT Correspondence', '2014-2015', '50000', 'yes', 'fix', '500', '49500.00', 'yes', '2', 'fix', '25/49475', '1'),
 (21, 'AIEEE Correspondence', '2014-2015', '50000', 'yes', 'fix', '500', '49500.00', 'yes', '2', 'percent', '75/25', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `extra_class`
+--
+
+CREATE TABLE IF NOT EXISTS `extra_class` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `course` varchar(20) NOT NULL,
+  `subject` varchar(20) NOT NULL,
+  `topic` varchar(255) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `timing` varchar(100) NOT NULL,
+  `discart_comment` text NOT NULL,
+  `teacher` varchar(20) NOT NULL,
+  `created_by` varchar(20) NOT NULL,
+  `created_comment` text NOT NULL,
+  `num_of_student` varchar(20) NOT NULL,
+  `allow` tinyint(1) NOT NULL DEFAULT '0',
+  `discart` tinyint(1) NOT NULL DEFAULT '0',
+  `created_date` datetime NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `status` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `extra_class`
+--
+
+INSERT INTO `extra_class` (`id`, `code`, `course`, `subject`, `topic`, `start_date`, `end_date`, `timing`, `discart_comment`, `teacher`, `created_by`, `created_comment`, `num_of_student`, `allow`, `discart`, `created_date`, `modify_date`, `status`) VALUES
+(1, 'extra_1001', '16', '5', 'Cercle d''Euler', '2014-07-20 00:00:00', '2014-07-30 00:00:00', '', '', '8', '2', 'No eos mutat zril tollit, ea pri libris detracto. No porro ipsum persius eum. Impetus detraxit delicata te sit, his molestiae euripidis in, ea falli scripta ius. An mel wisi volumus, ea sea delenit salutatus. Pri eu zril imperdiet mediocritatem, no his hinc possit consequat, id sed velit platonem. Autem ignota percipit cu vix, in mei congue possit indoctum.', '3', 1, 0, '2014-07-04 22:40:23', '0000-00-00 00:00:00', '1'),
+(2, 'extra_1002', '16', '5', 'Combinatorial Tiling Theory: Theorems - Algorithms - Visualization', '2014-07-21 00:00:00', '2014-07-26 00:00:00', '', '', '4', '2', 'Sea ne nulla tempor, utroque offendit ut ius, eum eu facete similique. Et duo denique placerat fabellas, cum cu hinc illud contentiones. Mel alienum adipisci ea, ea cum nibh rebum contentiones. In dicat inimicus repudiandae has, porro denique ad sit. At utamur recteque pri, ne est habeo maiorum sadipscing. Eu vis labitur nusquam, mei no erat vocibus tibique, ne dicunt prompta abhorreant duo.', '2', 1, 0, '2014-07-04 22:44:23', '0000-00-00 00:00:00', '1'),
+(3, 'extra_1003', '16', '4', 'Chemical and Physical Changes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '4', '2', 'Oratio numquam ea mea. Et delenit apeirian sed, cum mutat dolorum ex. Duo movet discere consequuntur no, cu summo pertinax eam, nec ei lorem indoctum adolescens. Ancillae assentior te per, id quo labitur laboramus. Quo ex iusto eruditi, an quo quidam repudiandae.\n\nNo eos mutat zril tollit, ea pri libris detracto. No porro ipsum persius eum. Impetus detraxit delicata te sit, his molestiae euripidis in, ea falli scripta ius. An mel wisi volumus, ea sea delenit salutatus. Pri eu zril imperdiet mediocritatem, no his hinc possit consequat, id sed velit platonem. Autem ignota percipit cu vix, in mei congue possit indoctum.', '1', 0, 0, '2014-07-04 22:54:09', '0000-00-00 00:00:00', '1'),
+(4, 'extra_1004', '14', '5', 'AskERIC Lesson Plans - Geometry', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '12', '1', 'Lorem ipsum dolor sit amet, duo ea mutat animal omittantur. Iudico homero definitionem nec et, ius omnesque inimicus ex, et tincidunt voluptatibus eum. Elit summo duo te, dico ullum indoctum per ad, harum vivendo singulis ea pro. Possim aeterno sit ei, habeo antiopam ei sit, latine ocurreret qui te.\r\n\r\nAt mutat omnes accusamus eam. Rebum ipsum consul quo no, falli tibique perpetua et sit, nec brute sapientem ut. Luptatum corrumpit gloriatur pri an. At mel minim recusabo incorrupte, et has iriure eloquentiam. Dolores lucilius usu ex, eu sale definiebas sed, vix ne invenire moderatius. Tale democritum est ad, ipsum partem possit sea et, pro luptatum interesset et. Tota mundi has et, pro eu omittam dissentiet.\r\n', '3', 0, 0, '2014-07-05 12:46:11', '0000-00-00 00:00:00', '1'),
+(5, 'extra_1005', '14', '3', 'Diffraction', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '7', '1', 'No eos mutat zril tollit, ea pri libris detracto. No porro ipsum persius eum. Impetus detraxit delicata te sit, his molestiae euripidis in, ea falli scripta ius. An mel wisi volumus, ea sea delenit salutatus. Pri eu zril imperdiet mediocritatem, no his hinc possit consequat, id sed velit platonem. Autem ignota percipit cu vix, in mei congue possit indoctum.', '1', 0, 0, '2014-07-05 12:49:11', '0000-00-00 00:00:00', '1'),
+(6, 'extra_1006', '14', '4', 'Printable Periodic Tables', '2014-07-20 00:00:00', '2014-07-28 00:00:00', '', '', '4', '1', 'His sumo debitis postulant ad, iisque detraxit menandri mea ea. Illum equidem elaboraret in sit, no pri tractatos reformidans adversarium. Unum dicunt cotidieque mel ne. Pri doming habemus ut, et mei probatus pericula. Mel et quis possim, accumsan consetetur eu pri.\r\n', '1', 1, 0, '2014-07-05 12:52:47', '0000-00-00 00:00:00', '1'),
+(7, 'extra_1007', '14', '1', 'Matrix theory', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '6', '1', 'Pri iudicabit dissentias in. An solet essent detracto ius, vide option at vim, ex pro vocent molestie appetere. Probo urbanitas definiebas usu in, ut nec everti aeterno voluptatum. Usu ancillae petentium ne. Lorem fabellas pri eu, et quod erant electram per. Vix id idque dolore, facete lobortis no vix.\r\n', '1', 0, 0, '2014-07-05 12:58:19', '0000-00-00 00:00:00', '1'),
+(8, 'extra_1008', '14', '5', 'AskERIC Lesson Plans - Geometry', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '6', '1', 'Pri iudicabit dissentias in. An solet essent detracto ius, vide option at vim, ex pro vocent molestie appetere. Probo urbanitas definiebas usu in, ut nec everti aeterno voluptatum. Usu ancillae petentium ne. Lorem fabellas pri eu, et quod erant electram per. Vix id idque dolore, facete lobortis no vix.\r\n', '1', 0, 0, '2014-07-05 13:05:47', '0000-00-00 00:00:00', '1'),
+(9, 'extra_1009', '14', '4', 'Chemical and Physical Changes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '17', '4', 'The popover plugin generates content and markup on demand, and by default places popover after their trigger element. You can add popover in the following two ways', '1', 0, 0, '2014-07-05 17:34:51', '0000-00-00 00:00:00', '1'),
+(10, 'extra_1010', '14', '7', 'Aid for Calculus', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '12', '1', 'ehllo', '1', 0, 0, '2014-07-05 17:38:20', '0000-00-00 00:00:00', '1'),
+(11, 'extra_1011', '15', '6', 'Basic EXCEL-skills for calculus and differential equations', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '19', '8', '', '1', 0, 0, '2014-07-05 23:38:52', '0000-00-00 00:00:00', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `extra_class_student`
+--
+
+CREATE TABLE IF NOT EXISTS `extra_class_student` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `class_code` varchar(50) NOT NULL,
+  `student_id` varchar(20) NOT NULL,
+  `batch` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `extra_class_student`
+--
+
+INSERT INTO `extra_class_student` (`id`, `class_code`, `student_id`, `batch`) VALUES
+(1, 'extra_1001', '2', '9'),
+(2, 'extra_1002', '2', '9'),
+(3, 'extra_1003', '2', '9'),
+(4, 'extra_1004', '1', '6'),
+(5, 'extra_1005', '1', '6'),
+(6, 'extra_1006', '1', '6'),
+(7, 'extra_1007', '1', '6'),
+(8, 'extra_1008', '1', '6'),
+(9, 'extra_1004', '2', '9'),
+(10, 'extra_1004', '3', '6'),
+(11, 'extra_1001', '4', '5'),
+(12, 'extra_1009', '4', '5'),
+(13, 'extra_1010', '1', '6'),
+(14, 'extra_1011', '8', '4'),
+(15, 'extra_1001', '8', '4'),
+(16, 'extra_1002', '8', '4');
 
 -- --------------------------------------------------------
 
@@ -468,14 +563,14 @@ CREATE TABLE IF NOT EXISTS `student` (
 --
 
 INSERT INTO `student` (`id`, `name`, `username`, `password`, `code`, `image`, `dob`, `doj`, `gender`, `blood_group`, `category`, `class`, `country`, `state`, `city`, `parent_relation`, `parent_name`, `parent_occupation`, `parent_phone`, `parent_email`, `email`, `phone`, `current_address`, `permanent_address`, `course`, `batch`, `total_amount`, `discount`, `discount_mode`, `discount_amount`, `net_amount`, `pay_amount`, `payment_mode`, `cheque_number`, `create_date`, `modify_date`, `last_login_time`, `news`, `change_pass_status`, `change_pass_time`, `status`) VALUES
-(1, 'Rishabh Agrawal', 'student_1001', '202cb962ac59075b964b07152d234b70', 't5i87s3', 'tmq99h6.jpg', '20-04-1990', '12-05-2014', 'Male', 'AB+', 'General', 'VI', 'India', 'Delhi', 'New Delhi', 'Father', 'Rakesh Kumar Agrawal', 'Business', '9415059200', 'rakesh@gmail.com', 'rishabh_agr@gmail.com,therishabhagrawal@yahoo.com', '9845784578', 'Sitapur, Uttar Pradesh, India (261141)', 'Sitapur, Uttar Pradesh, India (261141)', '14', '6', '47390.00', '', '', '', '', '', '', '', '2014-05-10 14:20:56', '2014-06-04 12:28:47', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
-(2, 'Sachin Yadav', 'student_1002', '202cb962ac59075b964b07152d234b70', 'ok7ano0', '5o2x1m1.jpg', '11-05-1989', '06-05-2014', 'Male', 'O-', 'OBC', 'VIII', 'India', 'Delhi', 'New Delhi', 'Father', 'Ram Lal', 'Farmer', '8855221144', 'Ramlal@gmail.com', 'sachin@yahoo.com', '897954786', 'Pune', 'Pune', '16', '9', '44550.00', '', '', '', '', '', '', '', '2014-05-11 14:20:56', '2014-06-04 00:08:46', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
+(1, 'Rishabh Agrawal', 'student_1001', '202cb962ac59075b964b07152d234b70', 't5i87s3', 'tmq99h6.jpg', '20-04-1990', '12-05-2014', 'Male', 'AB+', 'General', 'VI', 'India', 'Delhi', 'New Delhi', 'Father', 'Rakesh Kumar Agrawal', 'Business', '9415059200', 'rakesh@gmail.com', 'rishabh_agr@gmail.com,therishabhagrawal@yahoo.com', '9845784578', 'Sitapur, Uttar Pradesh, India (261141)', 'Sitapur, Uttar Pradesh, India (261141)', '14', '6', '47390.00', '', '', '', '', '', '', '', '2014-05-10 14:20:56', '2014-06-04 12:28:47', '0000-00-00 00:00:00', '*5**17*', '0', '2014-07-03 14:43:31', '1'),
+(2, 'Sachin Yadav', 'student_1002', '202cb962ac59075b964b07152d234b70', 'ok7ano0', '5o2x1m1.jpg', '11-05-1989', '06-05-2014', 'Male', 'O-', 'OBC', 'VIII', 'India', 'Delhi', 'New Delhi', 'Father', 'Ram Lal', 'Farmer', '8855221144', 'Ramlal@gmail.com', 'sachin@yahoo.com', '897954786', 'Pune', 'Pune', '16', '9', '44550.00', '', '', '', '', '', '', '', '2014-05-11 14:20:56', '2014-06-04 00:08:46', '0000-00-00 00:00:00', '', '0', '2014-07-04 11:52:32', '1'),
 (3, 'Mayank Goel', 'student_1003', '202cb962ac59075b964b07152d234b70', 'k01r469', 'bxaaik7.jpg', '03-05-1990', '10-05-2014', 'Male', 'AB-', 'General', 'XII', 'Bahrain', 'Al Manamah', 'New Delhi', 'Mother', 'Gita Devi', 'Business', '8855224488', 'gita@gmail.com', 'mayank@gmail.com', '9878457878', 'Malviya Nagar, New Delhi (585749)', 'Malviya Nagar, New Delhi (585749)', '14', '6', '47390.00', '', '', '', '', '', '', '', '2014-05-11 14:32:35', '2014-06-04 00:08:57', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
-(4, 'Shivani Garg', 'student_1004', '202cb962ac59075b964b07152d234b70', 'ygnbrg8', 'hw9gf08.jpg', '10-03-1989', '02-05-2014', 'Female', 'O+', 'General', 'XII', 'India', 'Uttar Pradesh', 'Ghaziabad', 'Mother', 'Gungun Garg', 'House Wife', '9988555566', 'gungun_garg@outlook.com', 'shivani09@yahoo.com', '9855698745', 'Rajnagar, Ghaziabad, 258548 India', 'Rajnagar, Ghaziabad, 258548 India', '14', '5', '47390.00', '', '', '', '', '', '', '', '2014-05-11 16:28:41', '2014-06-04 00:09:34', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
+(4, 'Simaran Garg', 'student_1004', '202cb962ac59075b964b07152d234b70', 'ygnbrg8', 'hw9gf08.jpg', '10-03-1989', '02-05-2014', 'Female', 'O+', 'General', 'XII', 'India', 'Uttar Pradesh', 'Ghaziabad', 'Mother', 'Gungun Garg', 'House Wife', '9988555566', 'gungun_garg@outlook.com', 'shivani09@yahoo.com', '9855698745', 'Rajnagar, Ghaziabad, 258548 India', 'Rajnagar, Ghaziabad, 258548 India', '14', '5', '47390.00', '', '', '', '', '', '', '', '2014-05-11 16:28:41', '2014-06-04 00:09:34', '0000-00-00 00:00:00', '', '0', '2014-07-05 16:28:39', '1'),
 (5, 'Garima Gupta', 'student_1005', '202cb962ac59075b964b07152d234b70', 'ca5ghz1', '2krih24.jpg', '15-06-1988', '03-05-2014', 'Female', 'B+', 'OBC', 'XI', 'India', 'Uttar Pradesh', 'Kanpur', 'Mother', 'Gita Gupta', 'House Wife', '9958745869', 'gita_gupta@gmail.com', 'garima@gmail.com,garima_123@outlook.com', '9874585869', 'Kanpur, India', 'Kanpur India', '16', '9', '44550.00', '', '', '', '', '', '', '', '2014-05-11 16:45:18', '2014-06-04 00:10:01', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
 (6, 'Gungun Gupta', 'student_1006', '202cb962ac59075b964b07152d234b70', 'm92omj7', 'r5u6ph8.jpg', '15-06-1992', '03-05-2014', 'Female', 'B+', 'OBC', 'X', 'India', 'Uttar Pradesh', 'Bhopal', 'Mother', 'Gita Gupta', 'House Wife', '9958745869', 'gita_gupta@gmail.com', 'garima@yahoo.com', '9874585867', 'Kanpur, India', 'Kanpur India', '16', '3', '44550.00', '', '', '', '', '', '', '', '2014-05-11 16:45:18', '2014-06-04 00:10:54', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
 (7, 'Somya Tripathi', 'student_1007', '202cb962ac59075b964b07152d234b70', 'mgylxl9', '7b6o7g1.jpg', '01-12-1994', '02-05-2014', 'Female', 'B+', 'General', 'XII', 'India', 'Uttar Pradesh', 'Lucknow', 'Father', 'Rohan Tripathi', 'Business', '9857484758', 'rohan_tri@yahoo.com', 'somyatripathi90@gmail.com', '8574847595', 'Lucknow', 'Lucknow', '14', '5', '47390.00', '', '', '', '', '', '', '', '2014-05-11 16:51:01', '2014-06-04 00:11:07', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
-(8, 'Arjur Goel', 'student_1008', '202cb962ac59075b964b07152d234b70', 'o8fgam8', 'ioclw39.jpg', '15-11-1998', '08-05-2014', 'Male', 'B-', 'General', 'XII', 'India', 'Uttar Pradesh', 'Ghaziabad', 'Father', 'Pankaj Goel', 'Doctor', '8956874125', 'pankaj@gmail.com', 'arjun@gmail.com', '8741253697', 'Ghaziabad', 'Ghaziabad', '15', '4', '32212.80', '', '', '', '', '', '', '', '2014-05-11 17:13:41', '2014-06-04 00:11:27', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
+(8, 'Arjur Goel', 'student_1008', '202cb962ac59075b964b07152d234b70', 'o8fgam8', 'ioclw39.jpg', '15-11-1998', '08-05-2014', 'Male', 'B-', 'General', 'XII', 'India', 'Uttar Pradesh', 'Ghaziabad', 'Father', 'Pankaj Goel', 'Doctor', '8956874125', 'pankaj@gmail.com', 'arjun@gmail.com', '8741253697', 'Ghaziabad', 'Ghaziabad', '15', '4', '32212.80', '', '', '', '', '', '', '', '2014-05-11 17:13:41', '2014-06-04 00:11:27', '0000-00-00 00:00:00', '', '0', '2014-07-05 23:38:35', '1'),
 (9, 'Karan Magan', 'student_1009', '202cb962ac59075b964b07152d234b70', 'zytx855', 'default.png', '10-03-1990', '02-05-2014', 'Male', 'O+', 'General', 'VIII', 'India', 'Jammu and Kashmir', 'Jammu & Kashmir', 'Father', 'Prashant Magan', 'Doctor', '9854125874', 'prasant@gmail.com', 'karan@gmail.com', '9847458745', 'Jammu & Kashmir', 'Jammu & Kashmir', '18', '16', '49500.00', '', '', '', '', '', '', '', '2014-05-11 17:17:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
 (10, 'Mukesh Agrawal', 'student_1010', '202cb962ac59075b964b07152d234b70', '3lsfwy9', 'p2rsmj3.jpg', '19-05-1992', '07-02-2014', 'Male', 'A+', 'General', 'X', 'India', 'Delhi', 'New Delhi', 'Mother', 'Shilpi Agrawal', 'Doctor', '9847596841', 'shilpi@gmail.com', 'mukesh_agr@yahoo.com', '9874521547', 'New Delhi, India', 'New Delhi, India', '18', '16', '49500.00', '', '', '', '', '', '', '', '2014-05-11 17:28:51', '2014-06-04 00:11:50', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
 (11, 'Rakesh Agrawal', 'student_1011', '202cb962ac59075b964b07152d234b70', 'udkgnn1', 'ry1j4w7.jpg', '14-02-1990', '07-02-2014', 'Male', 'A+', 'General', 'XII', 'India', 'Delhi', 'Delhi', 'Father', 'Bal Krishna', 'Business', '8574847595', 'balkrishna@gmail.com', 'rakeshagrawal735@gmail.com', '8475957484', 'New Delhi, India', 'New Delhi, India', '18', '16', '49500.00', '', '', '', '', '', '', '', '2014-05-11 17:30:43', '2014-06-04 00:12:23', '0000-00-00 00:00:00', '', '1', '0000-00-00 00:00:00', '1'),
@@ -502,7 +597,6 @@ INSERT INTO `student` (`id`, `name`, `username`, `password`, `code`, `image`, `d
 CREATE TABLE IF NOT EXISTS `subject` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `topic` text NOT NULL,
   `status` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
@@ -511,18 +605,18 @@ CREATE TABLE IF NOT EXISTS `subject` (
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`id`, `name`, `topic`, `status`) VALUES
-(1, 'Algebra', ' Algebraic Expressions,Ratio and Proportion,testing,Matrix theory,Matrix multiplication,Matrix addition,Basis transformation matrix,Trace,Characteristic polynomial,Rank,Matrix inversion, invertible matrix,Adjugate,Transpose,Dot product', '1'),
-(2, 'Physics 2', 'Plane mirror,Rarefaction,Signal generator,Tension,Young''s double-slit experiment,Vibration,Velocity', '1'),
-(3, 'Physics', 'Air resistance,Diffraction,Electromagnetic spectrum,Gamma ray -- Gravity,Inertia -- Interference,Kinetic energy,Oscilloscope', '1'),
-(4, 'Chemistry', 'Periodic Table,Chemical and Physical Changes,Printable Periodic Tables', '1'),
-(5, 'Geometry', 'Alice Meets the 4th Dimension,AskERIC Lesson Plans - Geometry,Border Pattern Gallery,Cabri Java Project,Cercle d''Euler,Combinatorial Tiling Theory: Theorems - Algorithms - Visualization', '1'),
-(6, 'Calculus', 'Basic EXCEL-skills for calculus and differential equations,Better File Cabinet,Area of a Circle,AP Calculus on the Web,Aid for Calculus,Calculus Resources On-Line,Bisection Method Tutorial,Cal Poly Linked Curriculum Program Interdisciplinary Projects,Calculus', '1'),
-(7, 'Calculus 2', 'Area of a Circle,AP Calculus on the Web,Aid for Calculus,Calculus Resources On-Line,Bisection Method Tutorial,Calculus', '1'),
-(8, 'Number System', 'Rational Numbers, Powers,Squares, Square roots, Cubes, Cube roots,Playing with numbers', '1'),
-(9, 'Calculus 1', 'Basic EXCEL-skills for calculus and differential equations,Better File Cabinet,Area of a Circle,AP Calculus on the Web,Aid for Calculus,Calculus Resources On-Line,Bisection Method Tutorial,Cal Poly Linked Curriculum Program Interdisciplinary Projects,Calculus', '1'),
-(10, 'History', 'Egyptian Art in the Age of the Pyramids,The New Greek Galleries,Oriental Institute Virtual Museum', '1'),
-(11, 'Trigonometry Maths', 'Angular distance,Angle,Law of sines,Law of cosines,Law of tangents,Law of cotangents,Mollweide''s formula', '1');
+INSERT INTO `subject` (`id`, `name`, `status`) VALUES
+(1, 'Algebra', '1'),
+(2, 'Physics 2', '1'),
+(3, 'Physics', '1'),
+(4, 'Chemistry', '1'),
+(5, 'Geometry', '1'),
+(6, 'Calculus', '1'),
+(7, 'Calculus 2', '1'),
+(8, 'Number System', '1'),
+(9, 'Calculus 1', '1'),
+(10, 'History', '1'),
+(11, 'Trigonometry Maths', '1');
 
 -- --------------------------------------------------------
 
@@ -793,3 +887,102 @@ INSERT INTO `timetable` (`id`, `code`, `batch`, `day`, `start_time`, `end_time`,
 (592, '30fdk9', 5, 'Saturday', '7.00 AM', '8.00 AM', '', '', '1'),
 (593, '30fdk9', 5, 'Saturday', 'Break', 'Break', 'Break', 'Break', '1'),
 (594, '1kyny6', 5, 'Saturday', '8.30 AM', '9.30 AM', '', '', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topic`
+--
+
+CREATE TABLE IF NOT EXISTS `topic` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `subject` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
+
+--
+-- Dumping data for table `topic`
+--
+
+INSERT INTO `topic` (`id`, `name`, `subject`) VALUES
+(6, 'Angular distance', '11'),
+(7, 'Angle', '11'),
+(8, 'Law of sines', '11'),
+(9, 'Law of cosines', '11'),
+(10, 'Law of tangents', '11'),
+(11, 'Law of cotangents', '11'),
+(12, 'Mollweide''s formula', '11'),
+(32, ' Algebraic Expressions', '1'),
+(33, 'Ratio and Proportion', '1'),
+(34, 'testing', '1'),
+(35, 'Matrix theory', '1'),
+(36, 'Matrix multiplication', '1'),
+(37, 'Matrix addition', '1'),
+(38, 'Basis transformation matrix', '1'),
+(39, 'Trace', '1'),
+(40, 'Characteristic polynomial', '1'),
+(41, 'Rank', '1'),
+(42, 'Matrix inversion', '1'),
+(43, ' invertible matrix', '1'),
+(44, 'Adjugate', '1'),
+(45, 'Transpose', '1'),
+(46, 'Dot product', '1'),
+(54, 'Air resistance', '3'),
+(55, 'Diffraction', '3'),
+(56, 'Electromagnetic spectrum', '3'),
+(57, 'Gamma ray -- Gravity', '3'),
+(58, 'Inertia -- Interference', '3'),
+(59, 'Kinetic energy', '3'),
+(60, 'Oscilloscope', '3'),
+(61, 'Periodic Table', '4'),
+(62, 'Chemical and Physical Changes', '4'),
+(63, 'Printable Periodic Tables', '4'),
+(76, 'Basic EXCEL-skills for calculus and differential equations', '6'),
+(77, 'Better File Cabinet', '6'),
+(78, 'Area of a Circle', '6'),
+(79, 'AP Calculus on the Web', '6'),
+(80, 'Aid for Calculus', '6'),
+(81, 'Calculus Resources On-Line', '6'),
+(82, 'Bisection Method Tutorial', '6'),
+(83, 'Cal Poly Linked Curriculum Program Interdisciplinary Projects', '6'),
+(84, 'Calculus', '6'),
+(85, 'Area of a Circle', '7'),
+(86, 'AP Calculus on the Web', '7'),
+(87, 'Aid for Calculus', '7'),
+(88, 'Calculus Resources On-Line', '7'),
+(89, 'Bisection Method Tutorial', '7'),
+(90, 'Calculus', '7'),
+(91, 'Rational Numbers', '8'),
+(92, ' Powers', '8'),
+(93, 'Squares', '8'),
+(94, ' Square roots', '8'),
+(95, ' Cubes', '8'),
+(96, ' Cube roots', '8'),
+(97, 'Playing with numbers', '8'),
+(98, 'Basic EXCEL-skills for calculus and differential equations', '9'),
+(99, 'Better File Cabinet', '9'),
+(100, 'Area of a Circle', '9'),
+(101, 'AP Calculus on the Web', '9'),
+(102, 'Aid for Calculus', '9'),
+(103, 'Calculus Resources On-Line', '9'),
+(104, 'Bisection Method Tutorial', '9'),
+(105, 'Cal Poly Linked Curriculum Program Interdisciplinary Projects', '9'),
+(106, 'Calculus', '9'),
+(107, 'Egyptian Art in the Age of the Pyramids', '10'),
+(108, 'The New Greek Galleries', '10'),
+(109, 'Oriental Institute Virtual Museum', '10'),
+(115, 'Alice Meets the 4th Dimension', '5'),
+(116, 'AskERIC Lesson Plans - Geometry', '5'),
+(117, 'Border Pattern Gallery', '5'),
+(118, 'Cabri Java Project', '5'),
+(119, 'Cercle d''Euler', '5'),
+(120, 'Combinatorial Tiling Theory: Theorems - Algorithms - Visualization', '5'),
+(121, 'Signal generator', '2'),
+(122, 'Tension', '2'),
+(123, 'Young''s double-slit experiment', '2'),
+(124, 'Vibration', '2');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
