@@ -6,7 +6,7 @@
 	<div class="col-lg-6">
 		<div class="row">
 			<div class="col-lg-4 col-lg-offset-6">
-				<a href="<?php echo base_url();?>news"><div class="submit-btn">Add Extra Class</div></a>
+				<a href="<?php echo base_url();?>extraclass"><div class="submit-btn">Add Extra Class</div></a>
 			</div>
 		</div>
 	</div>
@@ -47,34 +47,48 @@ else{
 
 				<!-- search bar -->
 				<div class="row">
-					<div class="col-lg-4 search-bar">
-						<input type="text" class="code-search"  placeholder="Class Code..">
-					</div>
-					<div class="col-lg-4 search-bar">
-						<select name="" class="subject-search">
-							<option value="">Select Subject</option>
-							<?php
-							$subject = explode("/", $subject_string);
-							foreach ($subject as $subject_id) {
-							 	$subject_detail = $this->user_model->fetchbyid($subject_id,"subject");
-							 	echo '<option value = "'.$subject_detail['id'].'">'.$subject_detail['name'].'</option>';
-							 	$subject_array[] = $subject_detail['id'];
-							 } 
-							?>
-						</select>
-					</div>
+					<div class="row">
+						<div class="col-lg-11">
+							<div class="row">
+								<div class="col-lg-4 search-bar">
+									<input type="text" class="code-search" placeholder="Class Code..">
+								</div>
+								<div class="col-lg-4 search-bar">
+									<select name="" class="subject-search">
+										<option value="">Select Subject</option>
+										<?php
+										$subject = explode("/", $subject_string);
+										foreach ($subject as $subject_id) {
+										 	$subject_detail = $this->user_model->fetchbyid($subject_id,"subject");
+										 	echo '<option value = "'.$subject_detail['id'].'">'.$subject_detail['name'].'</option>';
+										 	$subject_array[] = $subject_detail['id'];
+										 } 
+										?>
+									</select>
+								</div>
 
-					<div class="col-lg-4 search-bar" style="padding-left:0px;">
-						<select name="" class="topic-search">
-							<option value="">Select Topic</option>
-						</select>
+								<div class="col-lg-4 search-bar" style="padding-left:0px;">
+									<select name="" class="topic-search">
+										<option value="">Select Topic</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-1" style="padding-left: 0px;width:6%;height:44px; border-bottom: 1px solid #ccc;">
+							<div class="refresh-btn">
+								<img src="<?php echo base_url(); ?>img/refresh.png" alt="" style="height:35px;">
+							</div>
+								
+						</div>
 					</div>
 					
 				</div>
 				<!-- // end search bar -->
 
 				<div class="row section">
-					<div class="col-lg-12" style="padding-right:0px;">		
+					<div class="col-lg-12" style="padding-right:0px;">
+					<div class="view-list-section">
+						
 						<div class="view-grid" id="running-classes">
 						
 							<?php
@@ -91,7 +105,7 @@ else{
 										$teacher_detail = $this->user_model->fetchbyid($extra_class['teacher'],'staff');
 										$start_date = date("jS, F Y",strtotime($extra_class['start_date']));
 										$end_date = date("jS, F Y",strtotime($extra_class['end_date']));
-										$number_of_batchmates = $this->user_model->fetch_batchment($extra_class['code'],$user_detail['batch']);
+										$number_of_batchmates = $this->user_model->fetch_batchment($extra_class['code'],$user_detail['batch'],$user_detail['id']);
 								?>
 								<div class="left-blog">
 									<!-- extra class code and total student section -->
@@ -152,6 +166,7 @@ else{
 							}//end if condition
 							else{
 
+								$p = 1;
 								// error message when there is no any organizaion location
 								echo '<div class="row">
 									<div class="col-lg-12 alert-msg">
@@ -181,7 +196,7 @@ else{
 									$teacher_detail = $this->user_model->fetchbyid($pending_class['teacher'],'staff');
 									$start_date = date("jS, F Y",strtotime($pending_class['start_date']));
 									$end_date = date("jS, F Y",strtotime($pending_class['end_date']));
-									$number_of_batchmates = $this->user_model->fetch_batchment($pending_class['code'],$user_detail['batch']);
+									$number_of_batchmates = $this->user_model->fetch_batchment($pending_class['code'],$user_detail['batch'],$user_detail['id']);
 							?>
 							<div class="left-blog">
 								<!-- extra class code and total student section -->
@@ -234,7 +249,7 @@ else{
 							}//end foreach loop
 						}//end if condition
 						else{
-
+							$q = 1;
 							// error message when there is no any organizaion location
 							echo '<div class="row">
 								<div class="col-lg-12 alert-msg">
@@ -263,7 +278,7 @@ else{
 										$teacher_detail = $this->user_model->fetchbyid($own_class['teacher'],'staff');
 										$start_date = date("jS, F Y",strtotime($own_class['start_date']));
 										$end_date = date("jS, F Y",strtotime($own_class['end_date']));
-										$number_of_batchmates = $this->user_model->fetch_batchment($own_class['code'],$user_detail['batch']);
+										$number_of_batchmates = $this->user_model->fetch_batchment($own_class['code'],$user_detail['batch'],$user_detail['id']);
 										//execute if extra class status is running..
 										if($own_class['allow'] == "1")
 										{
@@ -378,7 +393,7 @@ else{
 								}//end foreach loop
 							}//end if condition
 							else{
-
+								$a = 1;
 								// error message when there is no any organizaion location
 								echo '<div class="row">
 									<div class="col-lg-12 alert-msg">
@@ -410,7 +425,7 @@ else{
 									$teacher_detail = $this->user_model->fetchbyid($enroll_class_detail['teacher'],'staff');
 									$start_date = date("jS, F Y",strtotime($enroll_class_detail['start_date']));
 									$end_date = date("jS, F Y",strtotime($enroll_class_detail['end_date']));
-									$number_of_batchmates = $this->user_model->fetch_batchment($enroll_class_detail['code'],$user_detail['batch']);
+									$number_of_batchmates = $this->user_model->fetch_batchment($enroll_class_detail['code'],$user_detail['batch'],$user_detail['id']);
 
 									//execute if extra class status is running..
 									if($enroll_class_detail['allow'] == "1")
@@ -528,6 +543,7 @@ else{
 						}//end if condition
 						else
 						{
+							$x = 1;
 							// error message when there is no any organizaion location
 							echo '<div class="row">
 								<div class="col-lg-12 alert-msg">
@@ -539,10 +555,13 @@ else{
 						?>
 						</div>
 						<div class="hidden number_of_enroll"><?php echo --$x; ?></div>
+					</div><!-- // end view-list-section -->	
 					</div><!-- end  class="col-lg-12" -->
 				</div><!-- end row section -->
 
 			</div><!-- // end<div class="col-lg-6 left-side"> -->
+				
+
 			<!-- // end left hand site division -->
 
 
@@ -559,15 +578,18 @@ else{
 								</div>
 								<!-- // end subject form heading -->
 								<div class="col-lg-7 msg success-msg">
-									<?php 
-									if( $this->session->userdata('insert_class') != "" )
-									{
-										echo "Extra Class Has Been Successfully Added.";
-									}
-									?>
-									<span class="enrolled">Enrolled</span>
+									<span>
+										<?php 
+										if( $this->session->userdata('insert_class') != "" )
+										{
+											echo "Extra Class Has Been Successfully Added.";
+										}
+										?>
+									</span>
+									<div></div>
 								</div><!-- end success msg -->
-								<div class="col-lg-1 edit">
+								<div class="col-lg-1 extra-class-status">
+									<div></div>
 								</div>
 
 							</div><!-- // end row -->
@@ -603,50 +625,7 @@ else{
 								</div>
 								
 								<div class="already-class">
-									<div class="row" style="margin-top:15px;">
-										<div class="col-lg-6 label-text">Already Existing Class</div>
-										<div class="col-lg-6 view-full-detail" data-toggle="modal" data-target=".already-exist-modal">View Full Detail</div>
-									</div>
-									<div style="margin-top:10px;">
-										<table class="exist-class">
-												<thead>
-													<tr>
-														<td>S.No</td>
-														<td></td>
-														<td>Class</td>
-														<td title="Enrolled Student">Student</td>
-														<td>Operation</td>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-														<td><span class="running"></span></td>
-														<td>Extra_1010</td>
-														<td>10</td>
-														<td><span class="enroll">Enroll</span></td>
-													</tr>
-													<tr>
-														<td>2</td>
-														<td><span class="pending"></span></td>
-														<td>Extra_1010</td>
-														<td>10</td>
-														<td><span class="enrolled">Enrolled</span></td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td><span class="running"></span></td>
-														<td>Extra_1010</td>
-														<td>10</td>
-														<td><span class="enroll">Enroll</span></td>
-													</tr>
-												</tbody>
-											</table>
-									</div>
-									<div class="pending-running">
-										<span></span> Pending
-										<span></span> Running
-									</div>
+									
 								</div>
 
 
@@ -710,74 +689,7 @@ else{
 				    <h4 class="modal-title">Already Existing Class</h4>
 				</div>
 				<div class="modal-body">
-					<div class="row">
-						<div class="col-lg-6 subject">
-							<span>Subject: </span>
-							<span>Subject Name</span>
-						</div>
-						<div class="col-lg-6 topic">
-							<span>Topic: </span>
-							<span>Topic Name</span>
-						</div>
-					</div>
-					<table>
-						<thead>
-						<tr>
-							<td>S.No</td>
-							<td></td>
-							<td>Class</td>
-							<td title="Enrolled Student">Student</td>
-							<td>Batchmates</td>
-							<td>Teacher</td>
-							<td>Start Date</td>
-							<td>End Date</td>
-							<td>Timming</td>
-							<td>Operation</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td><span class="running"></span></td>
-							<td>Extra_1010</td>
-							<td>40</td>
-							<td>14</td>
-							<td>Rishabh Agrawal</td>
-							<td>14th July</td>
-							<td>20th July</td>
-							<td>05:00 - 06:00</td>
-							<td><span class="enroll">Enroll</span></td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td><span class="pending"></span></td>
-							<td>Extra_1010</td>
-							<td>14</td>
-							<td>1</td>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-							<td><span class="enrolled">Enrolled</span></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td><span class="running"></span></td>
-							<td>Extra_1010</td>
-							<td>18</td>
-							<td>8</td>
-							<td>Ram Kumar Mishra</td>
-							<td>13th July</td>
-							<td>24th July</td>
-							<td>05:30 - 06:30</td>
-							<td><span class="enroll">Enroll</span></td>
-						</tr>
-					</tbody>
-					</table>
-					<div class="pending-running">
-						<span></span> Pending
-						<span></span> Running
-					</div>
+					
 				</div>
     		</div>
     	</div>
@@ -786,6 +698,26 @@ else{
 </div>
 <!-- // modal for view already exist extra classes -->
 
+<!-- modal for view already exist extra classes -->
+<div class="modal fade view-class-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style=" width: 60%; ">
+    <div class="modal-content" style="width:100%;">
+      <div class="row">
+    		<div class="col-lg-12">
+		      	<div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				    <h4 class="modal-title">View Extra Class</h4>
+				</div>
+				<div class="modal-body">
+					
+				</div>
+    		</div>
+    	</div>
+    </div>
+  </div>
+</div>
+<!-- // modal for view already exist extra classes -->
+<div class="selected-extra-class hidden"></div>
 
 
 <?php 
@@ -820,6 +752,7 @@ jQuery(document).ready(function($) {
 		var topic = $(".topic-search").val();
 		var code = $(".code-search").val();
 		var status = $("#view_status").text();
+		var num_of_enroll = $(".number_of_enroll").text();
 
 		//update topic in search bar..
 		$.ajax({
@@ -835,24 +768,36 @@ jQuery(document).ready(function($) {
 		$.ajax({
 			url: "<?php echo base_url();?>index.php/extraclass/class_search",
 			type: 'POST',
-			data: {subject_id:subject_id, topic:topic, code:code, status:status},
+			data: {subject_id:subject_id, topic:topic, code:code, status:status , num_of_enroll:num_of_enroll},
 			success: function(result){
-				// alert(result);
+				$(".view-list-section").html(result);
 				if(status == 1)
 				{
-					$("#running-classes").html(result);
+					$("#running-classes").fadeIn(1000);
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
 				}
 				else if(status == 2)
 				{
-					$("#pending-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").fadeIn(1000);
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
 				}
 				else if(status == 3)
 				{
-					$("#own-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").fadeIn(1000);
+					$("#enroll-classes").hide();
 				}
 				else if(status == 4)
 				{
-					$("#enroll-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").fadeIn(1000);
 				}
 			}
 		});
@@ -864,28 +809,41 @@ jQuery(document).ready(function($) {
 		var topic = $(".topic-search").val();
 		var subject_id = $(".subject-search").val();
 		var status = $("#view_status").text();
+		var num_of_enroll = $(".number_of_enroll").text();
 
 		$.ajax({
 			url: "<?php echo base_url();?>index.php/extraclass/class_search",
 			type: 'POST',
-			data: {subject_id:subject_id, topic:topic, code:code, status:status},
+			data: {subject_id:subject_id, topic:topic, code:code, status:status , num_of_enroll:num_of_enroll},
 			success: function(result){
-				// alert(result);
+				$(".view-list-section").html(result);
 				if(status == 1)
 				{
-					$("#running-classes").html(result);
+					$("#running-classes").fadeIn(1000);
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
 				}
 				else if(status == 2)
 				{
-					$("#pending-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").fadeIn(1000);
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
 				}
 				else if(status == 3)
 				{
-					$("#own-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").fadeIn(1000);
+					$("#enroll-classes").hide();
 				}
 				else if(status == 4)
 				{
-					$("#enroll-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").fadeIn(1000);
 				}
 			}
 		});
@@ -897,37 +855,95 @@ jQuery(document).ready(function($) {
 		var code = $(".code-search").val();
 		var subject_id = $(".subject-search").val();
 		var status = $("#view_status").text();
+		var num_of_enroll = $(".number_of_enroll").text();
 
 		$.ajax({
 			url: "<?php echo base_url();?>index.php/extraclass/class_search",
 			type: 'POST',
-			data: {subject_id:subject_id, topic:topic, code:code, status:status},
+			data: {subject_id:subject_id, topic:topic, code:code, status:status , num_of_enroll:num_of_enroll},
 			success: function(result){
-				// alert(result);
+				$(".view-list-section").html(result);
 				if(status == 1)
 				{
-					$("#running-classes").html(result);
+					$("#running-classes").fadeIn(1000);
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
 				}
 				else if(status == 2)
 				{
-					$("#pending-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").fadeIn(1000);
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
 				}
 				else if(status == 3)
 				{
-					$("#own-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").fadeIn(1000);
+					$("#enroll-classes").hide();
 				}
 				else if(status == 4)
 				{
-					$("#enroll-classes").html(result);
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").fadeIn(1000);
 				}
 			}
 		});
 		
 	});
 
+	$(".extra-class").on('click', '.bottom-label', function(event) {
+		var id = $(this).attr("id");
+		$(".selected-extra-class").text(id);
+		$(".bottom-label").removeClass('selected');
+		$(this).addClass('selected');
+
+		$.ajax({
+			url: "<?php echo base_url();?>index.php/extraclass/class_view",
+			type: 'POST',
+			data: {class_id: id},
+			success: function(result){
+				$(".class-right-div").html(result);
+				var status = $(".status-hiddden").text();
+				var check_enroll = $(".enroll-hiddden").text();
+				if(status == "1")
+				{
+					$(".extra-class-status div").addClass("running");
+					$(".extra-class-status div").removeClass("pending");
+				}
+				else
+				{
+					$(".extra-class-status div").addClass("pending");
+					$(".extra-class-status div").removeClass("running");
+				}
+
+				//execute if user is already enrolled in this class..
+				if(check_enroll == "1")
+				{
+					$(".success-msg div").removeClass("enroll");
+					$(".success-msg div").addClass("enrolled");
+					$(".success-msg div").text("Enrolled");
+				}
+				else
+				{
+					$(".success-msg div").removeClass("enrolled");
+					$(".success-msg div").addClass("enroll");
+					$(".success-msg div").text("Enroll");
+				}
+
+			}
+		});
+
+	});
+
 
 	$("#subject").change(function() {
 		var subject_id = $(this).val();
+		$(".already-class").slideUp(800);
 		$.ajax({
 			url: "<?php echo base_url();?>index.php/extraclass/selectsubject",
 			type: 'POST',
@@ -991,10 +1007,6 @@ jQuery(document).ready(function($) {
 		$("#running-classes").fadeIn(1000);
 		// update view status..
 		$("#view_status").text('1');
-		//reset filter option..
-		$(".code-search").val("");
-		$(".subject-search").prop('selectedIndex',0);
-		$(".topic-search").prop('selectedIndex',0);
 	});
 
 	$(".pending-btn").click(function() {
@@ -1007,10 +1019,6 @@ jQuery(document).ready(function($) {
 
 		// update view status..
 		$("#view_status").text('2');
-		//reset filter option..
-		$(".code-search").val("");
-		$(".subject-search").prop('selectedIndex',0);
-		$(".topic-search").prop('selectedIndex',0);
 	});
 
 	$(".own-btn").click(function() {
@@ -1022,10 +1030,6 @@ jQuery(document).ready(function($) {
 		$("#own-classes").fadeIn(1000);
 		// update view status..
 		$("#view_status").text('3');
-		//reset filter option..
-		$(".code-search").val("");
-		$(".subject-search").prop('selectedIndex',0);
-		$(".topic-search").prop('selectedIndex',0);
 	});
 
 	$(".enroll-btn").click(function() {
@@ -1037,12 +1041,333 @@ jQuery(document).ready(function($) {
 		$("#enroll-classes").fadeIn(1000);
 		// update view status..
 		$("#view_status").text('4');
-		//reset filter option..
+	});
+
+	$(".extra-class").on('click', '.success-msg div', function() {
+		var status = $(".status-hiddden").text();
+		var check_enroll = $(".enroll-hiddden").text();
+		var id = $(".selected-extra-class").text();
+		var code = $(".code-search").val();
+		var subject_id = $(".subject-search").val();
+		var topic = $(this).val();
+		var status = $("#view_status").text();
+
+		//execute if user is already enrolled in this class..
+		if(check_enroll == "1")
+		{
+			var num_of_enroll = parseInt($(".number_of_enroll").text()) - 1;
+			$(".enroll-btn").text("Enrolled ("+num_of_enroll+")") ;
+			$(".number_of_enroll").text(num_of_enroll);
+
+			$(".success-msg div").removeClass("enrolled");
+			$(".success-msg div").addClass("enroll");
+			$(".success-msg div").text("Enroll");
+			$(".enroll-hiddden").text('0');
+
+			$(".class-right-div .num_of_stu").text( parseInt($(".class-right-div .num_of_stu").text()) - 1 )
+
+			//remove class from enrolled tab.
+			$("#enroll-classes #"+id).parent().slideUp(800);
+
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/remove_enroll",
+				type: 'POST',
+				data: {id:id},
+				success: function(result){
+				}
+			});
+
+
+		}
+		else
+		{
+			var num_of_enroll = parseInt($(".number_of_enroll").text()) + 1;
+			$(".enroll-btn").text("Enrolled ("+num_of_enroll+")") ;
+			$(".number_of_enroll").text(num_of_enroll);
+			$(".success-msg div").removeClass("enroll");
+			$(".success-msg div").addClass("enrolled");
+			$(".success-msg div").text("Enrolled");
+			$(".enroll-hiddden").text('1');
+
+			$(".class-right-div .num_of_stu").text( parseInt($(".class-right-div .num_of_stu").text()) + 1 )
+
+
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/add_enroll",
+				type: 'POST',
+				data: {subject_id:subject_id, topic:topic, code:code, status:status ,id:id},
+				success: function(result){
+					$("#enroll-classes").html(result);
+				}
+			});
+		}
+	});
+
+	$("#topic").change(function() {
+		var subject = $("#subject").val();
+		var topic = $("#topic").val();
+
+		if(topic != "")
+		{
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/exist_class",
+				type: 'POST',
+				data: {subject:subject, topic:topic},
+				success: function(result){
+					$(".already-class").html(result);
+					$(".already-class").hide();
+					$(".already-class").slideDown(800);
+
+				}
+			});
+		}
+		else
+		{
+			$(".already-class").slideUp(800);
+		}
+	});
+
+	$(".extra-class").on('click', 'table.exist-class tbody .en_btn', function() {
+		var enroll_status = $(this).parent().next().text();
+		var id = $(this).parent().next().next().text();
+		var code = $(".code-search").val();
+		var subject_id = $(".subject-search").val();
+		var topic = $(".topic-search").val();
+		var status = $("#view_status").text();
+
+		if(enroll_status == "1")
+		{
+			var num_of_enroll = parseInt($(".number_of_enroll").text()) - 1;
+			$(".enroll-btn").text("Enrolled ("+num_of_enroll+")") ;
+			$(".number_of_enroll").text(num_of_enroll);
+
+			$(this).removeClass("enrolled");
+			$(this).addClass("enroll");
+			$(this).text("Enroll");
+			$(this).parent().next().text('0');
+			$(this).parent().prev().text( parseInt($(this).parent().prev().text()) - 1 );
+
+			//remove class from enrolled tab.
+			$("#enroll-classes #"+id).parent().slideUp(800);
+
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/remove_enroll",
+				type: 'POST',
+				data: {id:id},
+				success: function(result){
+				}
+			});
+		}
+		else
+		{
+			var num_of_enroll = parseInt($(".number_of_enroll").text()) + 1;
+			$(".enroll-btn").text("Enrolled ("+num_of_enroll+")") ;
+			$(".number_of_enroll").text(num_of_enroll);
+			$(this).removeClass("enroll");
+			$(this).addClass("enrolled");
+			$(this).text("Enrolled");
+			$(this).parent().next().text('1');
+			$(this).parent().prev().text( parseInt($(this).parent().prev().text()) + 1 );
+
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/add_enroll",
+				type: 'POST',
+				data: {subject_id:subject_id, topic:topic, code:code, status:status ,id:id},
+				success: function(result){
+					$("#enroll-classes").html(result);
+				}
+			});
+		}
+	});
+
+	$(".already-exist-modal").on('click', 'tbody .e_btn', function() {
+		var enroll_status = $(this).parent().next().text();
+		var id = $(this).parent().next().next().text();
+		var code = $(".code-search").val();
+		var subject_id = $(".subject-search").val();
+		var topic = $(".topic-search").val();
+		var status = $("#view_status").text();
+
+		if(enroll_status == "1")
+		{
+			var num_of_enroll = parseInt($(".number_of_enroll").text()) - 1;
+			$(".enroll-btn").text("Enrolled ("+num_of_enroll+")") ;
+			$(".number_of_enroll").text(num_of_enroll);
+
+			$(this).removeClass("enrolled");
+			$(this).addClass("enroll");
+			$(this).text("Enroll");
+			$(this).parent().next().text('0');
+			$(this).parent().prev().prev().prev().prev().prev().prev().text( parseInt($(this).parent().prev().prev().prev().prev().prev().prev().text()) - 1 );
+
+
+			// update into table..
+			$("table.exist-class tbody .en_btn").each(function(){
+				if( $(this).parent().next().next().text() == id)
+				{
+					$(this).removeClass("enrolled");
+					$(this).addClass("enroll");
+					$(this).text("Enroll");
+					$(this).parent().next().text('0');
+					$(this).parent().prev().text( parseInt($(this).parent().prev().text()) - 1 );
+				}
+			})
+
+			//remove class from enrolled tab.
+			$("#enroll-classes #"+id).parent().slideUp(800);
+
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/remove_enroll",
+				type: 'POST',
+				data: {id:id},
+				success: function(result){
+				}
+			});
+		}
+		else
+		{
+			var num_of_enroll = parseInt($(".number_of_enroll").text()) + 1;
+			$(".enroll-btn").text("Enrolled ("+num_of_enroll+")") ;
+			$(".number_of_enroll").text(num_of_enroll);
+			$(this).removeClass("enroll");
+			$(this).addClass("enrolled");
+			$(this).text("Enrolled");
+			$(this).parent().next().text('1');
+			$(this).parent().prev().prev().prev().prev().prev().prev().text( parseInt($(this).parent().prev().prev().prev().prev().prev().prev().text()) + 1 );
+
+			// update into table..
+			$("table.exist-class tbody .en_btn").each(function(){
+				if( $(this).parent().next().next().text() == id)
+				{
+					$(this).removeClass("enroll");
+					$(this).addClass("enrolled");
+					$(this).text("Enrolled");
+					$(this).parent().next().text('1');
+					$(this).parent().prev().text( parseInt($(this).parent().prev().text()) + 1 );
+				}
+			})
+
+
+
+			$.ajax({
+				url: "<?php echo base_url();?>index.php/extraclass/add_enroll",
+				type: 'POST',
+				data: {subject_id:subject_id, topic:topic, code:code, status:status ,id:id},
+				success: function(result){
+					$("#enroll-classes").html(result);
+				}
+			});
+		}
+	});
+
+	$(".extra-class").on('click', '.view-full-detail', function() {
+		var subject = $("#subject").val();
+		var topic = $("#topic").val();
+		$.ajax({
+			url: "<?php echo base_url();?>index.php/extraclass/exist_class_modal",
+			type: 'POST',
+			data: {subject:subject, topic:topic},
+			success: function(result){
+				$(".already-exist-modal .modal-body").html(result);
+			}
+		});
+	});
+
+
+	
+	$(".refresh-btn").click(function() {
+		$(this).children().addClass('rotate');
+		setInterval(function(){	
+			$(".refresh-btn").children().removeClass('rotate');
+		}, 4000);
+		var code = "";
+		var topic = "";
+		var subject_id = "";
+		var status = $("#view_status").text();
+		var num_of_enroll = $(".number_of_enroll").text();
+
 		$(".code-search").val("");
 		$(".subject-search").prop('selectedIndex',0);
 		$(".topic-search").prop('selectedIndex',0);
+
+		$.ajax({
+			url: "<?php echo base_url();?>index.php/extraclass/class_search",
+			type: 'POST',
+			data: {subject_id:subject_id, topic:topic, code:code, status:status , num_of_enroll:num_of_enroll},
+			success: function(result){
+				$(".view-list-section").html(result);
+				if(status == 1)
+				{
+					$("#running-classes").fadeIn(1000);
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
+				}
+				else if(status == 2)
+				{
+					$("#running-classes").hide();
+					$("#pending-classes").fadeIn(1000);
+					$("#own-classes").hide();
+					$("#enroll-classes").hide();
+				}
+				else if(status == 3)
+				{
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").fadeIn(1000);
+					$("#enroll-classes").hide();
+				}
+				else if(status == 4)
+				{
+					$("#running-classes").hide();
+					$("#pending-classes").hide();
+					$("#own-classes").hide();
+					$("#enroll-classes").fadeIn(1000);
+				}
+			}
+		});
 	});
 
+	$(".extra-class").on('click', '.modal-view-class', function() {
+		var id = $(this).next().next().next().next().text();
+
+
+		$.ajax({
+			url: "<?php echo base_url();?>index.php/extraclass/class_view",
+			type: 'POST',
+			data: {class_id: id},
+			success: function(result){
+				$(".view-class-modal .modal-body").html(result);
+				// var status = $(".status-hiddden").text();
+				// var check_enroll = $(".enroll-hiddden").text();
+				// if(status == "1")
+				// {
+				// 	$(".extra-class-status div").addClass("running");
+				// 	$(".extra-class-status div").removeClass("pending");
+				// }
+				// else
+				// {
+				// 	$(".extra-class-status div").addClass("pending");
+				// 	$(".extra-class-status div").removeClass("running");
+				// }
+
+				// //execute if user is already enrolled in this class..
+				// if(check_enroll == "1")
+				// {
+				// 	$(".success-msg div").removeClass("enroll");
+				// 	$(".success-msg div").addClass("enrolled");
+				// 	$(".success-msg div").text("Enrolled");
+				// }
+				// else
+				// {
+				// 	$(".success-msg div").removeClass("enrolled");
+				// 	$(".success-msg div").addClass("enroll");
+				// 	$(".success-msg div").text("Enroll");
+				// }
+
+			}
+		});
+	});
 
 	//execute code when new classs is added into database..
 	<?php 
@@ -1071,7 +1396,7 @@ jQuery(document).ready(function($) {
 	    	backgroundColor:"#fff"
 	  	},9000);
 		
-		$(".success-msg").delay(5000).fadeOut(1000);
+		$(".success-msg span").delay(5000).fadeOut(1000);
 	<?php
 	}
 	 ?>

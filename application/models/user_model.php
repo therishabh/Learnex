@@ -1045,8 +1045,7 @@ class User_model extends CI_Model
 
 	function fetch_enroll_extra_class($student_id)
 	{
-		$this->db->where('student_id',$student_id);
-		$query = $this->db->get('extra_class_student');
+		$query = $this->db->query("SELECT extra_class_student.class_code AS class_code FROM extra_class_student LEFT JOIN extra_class ON extra_class_student.class_code = extra_class.code  WHERE  extra_class_student.student_id = '$student_id' ORDER BY extra_class.id DESC");
 		if($query->num_rows() > 0)
 		{
 			return $query->result_array();
@@ -1057,12 +1056,21 @@ class User_model extends CI_Model
 		}
 	}
 
-	function fetch_batchment($course_code,$batch)
+	function fetch_batchment($course_code,$batch,$student_id)
 	{
 		$this->db->where('class_code',$course_code);
 		$this->db->where('batch',$batch);
+		$this->db->where('student_id !=',$student_id);
 		$query = $this->db->get('extra_class_student');
-		return $query->num_rows();	
+
+		if($query->num_rows() > 0)
+		{
+			return $query->num_rows();
+		}	
+		else
+		{
+			return "0";
+		}
 	}
 
 	function running_extra_class_search($subject,$topic,$code)
@@ -1126,8 +1134,7 @@ class User_model extends CI_Model
 	}
 	function enroll_extra_class_search($subject,$topic,$code,$student_id)
 	{
-		// $query = $this->db->query("SELECT extra_class_student.class_code AS class_code FROM extra_class_student LEFT JOIN extra_class ON extra_class.code LIKE  CONCAT('%',$code,'%') AND extra_class.subject LIKE  CONCAT('%',$subject,'%')  AND extra_class.topic LIKE  CONCAT('%',$topic,'%') AND extra_class_student.student_id LIKE  CONCAT('%',$student_id,'%') WHERE extra_class_student.class_code = extra_class.code");
-		$query = $this->db->query("SELECT extra_class_student.class_code AS class_code FROM extra_class_student LEFT JOIN extra_class ON extra_class.code LIKE '%$code%' AND extra_class.subject LIKE '%$subject%'  AND extra_class.topic LIKE '$topic%' AND extra_class_student.student_id LIKE  '%$student_id%'  WHERE extra_class_student.class_code = extra_class.code");
+		$query = $this->db->query("SELECT extra_class_student.class_code AS class_code FROM extra_class_student LEFT JOIN extra_class ON extra_class.code LIKE '%$code%' AND extra_class.subject LIKE '%$subject%' AND extra_class.topic LIKE '$topic%' WHERE extra_class_student.class_code = extra_class.code AND extra_class_student.student_id = '$student_id' ORDER BY extra_class.id DESC");
 		if($query->num_rows() > 0)
 		{
 			return $query->result_array();
@@ -1136,6 +1143,46 @@ class User_model extends CI_Model
 		{
 			return false;
 		}
+	}
+
+	function check_enroll($class_code,$student_id)
+	{
+		$this->db->where('class_code',$class_code);
+		$this->db->where('student_id',$student_id);
+		$query = $this->db->get('extra_class_student');
+		return $query->num_rows();	
+	}
+
+	function remove_enroll($student_id,$class_code)
+	{
+		$this->db->where('class_code',$class_code);
+		$this->db->where('student_id',$student_id);
+		$query = $this->db->delete('extra_class_student');
+	}
+	
+	function exist_class_pending_running($subject,$topic)
+	{
+		$this->db->where('subject',$subject);
+		$this->db->where('topic',$topic);
+		$this->db->where('status',"1");
+		$this->db->where('discart',"0");
+		$this->db->order_by('id','desc');
+		$query = $this->db->get('extra_class');
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function number_of_total_student($class_code)
+	{
+		$this->db->where('class_code',$class_code);
+		$query = $this->db->get('extra_class_student');
+		return $query->num_rows();
 	}
 }
 
